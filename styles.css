@@ -1,0 +1,26 @@
+body {
+  font-family: arial;
+}
+
+h1, h3 {
+  margin: 15px;
+}
+
+h1 {
+  text-align: center;
+  width: 90%;
+}
+
+h3 {
+  text-align: justify;
+  width: 90%;
+}
+
+.box {
+  width: 500px;
+  height: 500px;
+  border: 1px solid;
+  border-radius: 5px;
+  color: white;
+  background-color: purple;
+}

@@ -1,0 +1,19 @@
+=================================
+-------  PROJECT SETUP  ---------
+=================================
+
+Hello, don't forget to do the following things in your brand new  basic Node App:
+
+"scripts": {
+    "test": "jest",
+    "format": "prettier src/*.js --write"
+  }
+
+Add in .gitignore:
+  node_modules
+  package-lock.json
+
+****** important ******
+save for "test" that is only run like: npm test
+the rest need the run method(?) as well
+e.g. npm run format

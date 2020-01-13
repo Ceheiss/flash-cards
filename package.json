@@ -1,0 +1,23 @@
+{
+  "name": "flash-cards",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "format": "prettier src/*.js --write"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^24.9.0",
+    "prettier": "^1.19.1",
+    "build": "browserify src/index.js -o bundle.js"
+  },
+  "dependencies": {
+    "browserify": "^16.5.0",
+    "hyperscript": "^2.0.2",
+    "hyperscript-helpers": "^3.0.3"
+  }
+}
