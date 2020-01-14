@@ -472,7 +472,6 @@ const initialState = {
 module.exports = initialState;
 },{}],10:[function(require,module,exports){
 const toggleCard = (flashCard) => {
-  console.log("heelo", flashCard)
   if (flashCard.isCurrentDisplayFront === true) {
     return {...flashCard, isCurrentDisplayFront: false};
   } else if (flashCard.isCurrentDisplayFront === false) {
@@ -486,17 +485,14 @@ const update = (model, message) => {
     case "toggle card":
       const returnedArray = [...model.flashCards];
       returnedArray[model.indexOfCurrentCard] = toggleCard(flashCard);
-      console.log("Lo que se retorna", {...model, flashCards: returnedArray})
       return {...model, flashCards: returnedArray};
     case "next card":
       let nextCard = model.indexOfCurrentCard + 1;
       if (nextCard === model.flashCards.length) nextCard = 0;
-      console.log("From next", {...model, indexOfCurrentCard: nextCard})
       return {...model, indexOfCurrentCard: nextCard};
     case "previous card":
       let previousCard = model.indexOfCurrentCard - 1;
       if (previousCard < 0) previousCard = 0; 
-      console.log("from previous", {...model, indexOfCurrentCard: previousCard})
       return {...model, indexOfCurrentCard: previousCard};
   }
 };
@@ -511,19 +507,25 @@ const hh = require("hyperscript-helpers");
 
 const { div, h1, h3, button } = hh(h);
 
+function buildButtons(dispatch) {
+  return {
+    nextButton: button(
+      {
+        onclick: () => dispatch("next card")
+      },
+      "Next"
+    ),
+    previousButton: button(
+      {
+        onclick: () => dispatch("previous card")
+      },
+      "Previous"
+    )
+  }
+}
+
 const view = (model, dispatch) => {
-  const nextButton = button(
-    {
-      onclick: () => dispatch("next card")
-    },
-    "Next"
-  );
-  const previousButton = button(
-    {
-      onclick: () => dispatch("previous card")
-    },
-    "Previous"
-  );
+  const { nextButton, previousButton } = buildButtons(dispatch);
   const buttons = div([previousButton, nextButton]);
   const flashCard = model.flashCards[model.indexOfCurrentCard];
   const frontCardDisplay = div(

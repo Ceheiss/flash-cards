@@ -3,19 +3,18 @@ const hh = require("hyperscript-helpers");
 
 const { div, h1, h3, button } = hh(h);
 
+function buildButtons(dispatch) {
+  return {
+    nextButton: button({ onclick: () => dispatch("next card") }, "Next"),
+    previousButton: button(
+      { onclick: () => dispatch("previous card") },
+      "Previous"
+    )
+  };
+}
+
 const view = (model, dispatch) => {
-  const nextButton = button(
-    {
-      onclick: () => dispatch("next card")
-    },
-    "Next"
-  );
-  const previousButton = button(
-    {
-      onclick: () => dispatch("previous card")
-    },
-    "Previous"
-  );
+  const { nextButton, previousButton } = buildButtons(dispatch);
   const buttons = div([previousButton, nextButton]);
   const flashCard = model.flashCards[model.indexOfCurrentCard];
   const frontCardDisplay = div(
