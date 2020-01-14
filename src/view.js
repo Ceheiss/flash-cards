@@ -1,24 +1,35 @@
-const h = require('hyperscript');
-const hh = require('hyperscript-helpers');
+const h = require("hyperscript");
+const hh = require("hyperscript-helpers");
 
-const { div, h1, h3 } = hh(h);
+const { div, h1, h3, button } = hh(h);
 
 const view = (model, dispatch) => {
-  let flashCards = model.flashCards;
-  console.log(flashCards)
-  const returnedElements = [];
-  flashCards.forEach(flashCard => {
-    if (flashCard.isCurrentDisplayFront){
-      returnedElements.push(div({"data-id": flashCard.id, className: "box", onclick: (e) => dispatch("toggle card", e)},[
-        h1({}, flashCard.frontMessage)
-      ]));
-    } else {
-      returnedElements.push(div({className: "box", onclick: (e) => dispatch("toggle card", e)}, [
-        h3({}, flashCard.backMessage)
-      ]));
-    }
-  })
-  return div({}, returnedElements);
-}
+  const nextButton = button(
+    {
+      onclick: () => dispatch("next card")
+    },
+    "Next"
+  );
+  const previousButton = button(
+    {
+      onclick: () => dispatch("previous card")
+    },
+    "Previous"
+  );
+  const buttons = div([previousButton, nextButton]);
+  const flashCard = model.flashCards[model.indexOfCurrentCard];
+  const frontCardDisplay = div(
+    { className: "box", onclick: () => dispatch("toggle card") },
+    [h1({}, flashCard.frontMessage)]
+  );
+  const backCardDisplay = div(
+    { className: "box", onclick: () => dispatch("toggle card") },
+    [h3({}, flashCard.backMessage)]
+  );
+
+  return flashCard.isCurrentDisplayFront
+    ? div([frontCardDisplay, buttons])
+    : div([backCardDisplay, buttons]);
+};
 
 module.exports = view;
