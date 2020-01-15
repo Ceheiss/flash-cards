@@ -41,7 +41,7 @@ const view = (model, dispatch) => {
 
   return flashCard.isCurrentDisplayFront
     ? div([frontCardDisplay, buttons])
-    : div([backCardDisplay, button]);
+    : div([backCardDisplay, buttons]);
 };
 
 module.exports = view;

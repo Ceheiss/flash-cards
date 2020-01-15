@@ -466,9 +466,9 @@ const sampledata = [{
 const initialState = {
   flashCards: sampledata,
   indexOfCurrentCard: 0,
-  frontMessageInput: "",
-  backMessageInput: "",
-  showForm: false
+  // frontMessageInput: "",
+  // backMessageInput: "",
+  // showForm: false
 }
 
 module.exports = initialState;
@@ -507,7 +507,6 @@ const update = (model, message) => {
   const flashCard = model.flashCards[model.indexOfCurrentCard];
   switch (message.type) {
     case MSGS.TOGGLE_CARD:
-      debugger;
       const returnedArray = [...model.flashCards];
       returnedArray[model.indexOfCurrentCard] = toggleCard(flashCard);
       return {...model, flashCards: returnedArray};
@@ -519,12 +518,12 @@ const update = (model, message) => {
       let previousCard = model.indexOfCurrentCard - 1;
       if (previousCard < 0) previousCard = 0; 
       return {...model, indexOfCurrentCard: previousCard};
-    case MSGS.FRONT_MESSAGE_INPUT:
-      const { frontMessageInput } = message;
-      return {...model, frontMessageInput}
-    case MSGS.BACK_MESSAGE_INPUT:
-      const { backMessageInput } = message;
-      return {...model, backMessageInput}
+    // case MSGS.FRONT_MESSAGE_INPUT:
+    //   const { frontMessageInput } = message;
+    //   return {...model, frontMessageInput}
+    // case MSGS.BACK_MESSAGE_INPUT:
+    //   const { backMessageInput } = message;
+    //   return {...model, backMessageInput}
   }
 };
 
@@ -579,7 +578,7 @@ const view = (model, dispatch) => {
 
   return flashCard.isCurrentDisplayFront
     ? div([frontCardDisplay, buttons])
-    : div([backCardDisplay, button]);
+    : div([backCardDisplay, buttons]);
 };
 
 module.exports = view;
