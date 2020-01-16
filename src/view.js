@@ -2,7 +2,7 @@ const h = require("hyperscript");
 const hh = require("hyperscript-helpers");
 const { frontInputMessage, backInputMessage, MSGS } = require("./update.js");
 
-const { div, h1, h3, button, input } = hh(h);
+const { div, h1, h3, button, /*input*/ } = hh(h);
 
 function buildButtons(dispatch) {
   return {
@@ -17,13 +17,13 @@ function buildButtons(dispatch) {
   };
 }
 
-function generateForm(dispatch) {
-  return div([
-    input({type: "text", oninput: e => dispatch(frontInputMessage(e.target.value))}),
-    input({type: "text", oninput: e => dispatch(backInputMessage(e.target.value))}),
-    input({type: "submit", onclick: () => alert("holaa")})
-  ])
-}
+// function generateForm(dispatch) {
+//   return div([
+//     input({type: "text", oninput: e => dispatch(frontInputMessage(e.target.value))}),
+//     input({type: "text", oninput: e => dispatch(backInputMessage(e.target.value))}),
+//     input({type: "submit", onclick: () => alert("holaa")})
+//   ])
+// }
 
 const view = (model, dispatch) => {
   const { nextButton, previousButton } = buildButtons(dispatch);
@@ -37,7 +37,7 @@ const view = (model, dispatch) => {
     { className: "box", onclick: () => dispatch({type: MSGS.TOGGLE_CARD}) },
     [h3({}, flashCard.backMessage)]
   );
-  const form =  generateForm(dispatch);
+  //const form =  generateForm(dispatch);
 
   return flashCard.isCurrentDisplayFront
     ? div([frontCardDisplay, buttons])

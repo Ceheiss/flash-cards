@@ -14,17 +14,13 @@ const toggleCard = (flashCard) => {
   } 
 }
 
-const frontInputMessage = (frontMessageInput) => {
-  return {
+const inputMessage = (cardSide, inputMessage) => {
+  return cardSide === "front" ? {
     type: MSGS.FRONT_MESSAGE_INPUT,
-    frontMessageInput
-  }
-}
-
-const backInputMessage = (backMessageInput) => {
-  return {
+    frontMessageInput: inputMessage
+  } : {
     type: MSGS.BACK_MESSAGE_INPUT,
-    backMessageInput
+    backMessageInput: inputMessage
   }
 }
 
@@ -55,7 +51,6 @@ const update = (model, message) => {
 module.exports = {
   toggleCard,
   update,
-  frontInputMessage,
-  backInputMessage,
+  inputMessage,
   MSGS
 }
