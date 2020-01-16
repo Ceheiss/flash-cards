@@ -39,12 +39,6 @@ const update = (model, message) => {
       let previousCard = model.indexOfCurrentCard - 1;
       if (previousCard < 0) previousCard = 0; 
       return {...model, indexOfCurrentCard: previousCard};
-    // case MSGS.FRONT_MESSAGE_INPUT:
-    //   const { frontMessageInput } = message;
-    //   return {...model, frontMessageInput}
-    // case MSGS.BACK_MESSAGE_INPUT:
-    //   const { backMessageInput } = message;
-    //   return {...model, backMessageInput}
   }
 };
 

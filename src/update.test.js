@@ -13,7 +13,6 @@ const mockModel = {
   indexOfCurrentCard: 0,
 }
 
-
 test('should change "isCurrentDisplayFront" property of model with each click', () => {
   const sampleModel = { isCurrentDisplayFront: true };
   const received = toggleCard(sampleModel);
