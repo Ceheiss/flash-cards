@@ -49,14 +49,12 @@ const update = (model, message) => {
         { frontMessage: front, backMessage: back, isCurrentDisplayFront: true }
       ];
       console.log(arrayWithNewCard);
-      return { ...model, flashCards: arrayWithNewCard };
-      ``;
+      return { ...model, flashCards: arrayWithNewCard }
   }
 };
 
 module.exports = {
   toggleCard,
   update,
-  inputMessage,
   MSGS
 };

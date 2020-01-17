@@ -10,7 +10,7 @@ const sampledata = [{
 
 const initialState = {
   flashCards: sampledata,
-  indexOfCurrentCard: 0,
+  indexOfCurrentCard: 0
 }
 
 module.exports = initialState;

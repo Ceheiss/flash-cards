@@ -465,7 +465,7 @@ const sampledata = [{
 
 const initialState = {
   flashCards: sampledata,
-  indexOfCurrentCard: 0,
+  indexOfCurrentCard: 0
 }
 
 module.exports = initialState;
@@ -521,15 +521,13 @@ const update = (model, message) => {
         { frontMessage: front, backMessage: back, isCurrentDisplayFront: true }
       ];
       console.log(arrayWithNewCard);
-      return { ...model, flashCards: arrayWithNewCard };
-      ``;
+      return { ...model, flashCards: arrayWithNewCard }
   }
 };
 
 module.exports = {
   toggleCard,
   update,
-  inputMessage,
   MSGS
 };
 
@@ -567,7 +565,7 @@ function buildForm(dispatch) {
             back: document.getElementById("back-input").value
           }
         })
-    })
+    }, "add card")
   ]);
 }
 

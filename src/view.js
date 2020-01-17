@@ -31,7 +31,7 @@ function buildForm(dispatch) {
             back: document.getElementById("back-input").value
           }
         })
-    })
+    }, "add card")
   ]);
 }
 
