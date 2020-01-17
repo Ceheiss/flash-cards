@@ -1,9 +1,21 @@
 body {
   font-family: arial;
+  background: #d53369; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #cbad6d,
+    #d53369
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #cbad6d,
+    #d53369
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
-h1, h3 {
-  margin: 15px;
+h1,
+h3 {
+  margin: 30px 15px;
 }
 
 h1 {
@@ -16,11 +28,54 @@ h3 {
   width: 90%;
 }
 
+input {
+  font-size: 15px;
+}
+
+label {
+  font-size: 18px;
+  color: white;
+}
+
+input,
+label,
+button {
+  margin-top: 15px;
+}
+
 .box {
   width: 500px;
   height: 500px;
-  border: 1px solid;
   border-radius: 5px;
   color: white;
-  background-color: purple;
+  margin-bottom: 2%;
+  padding: 10px;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.box,
+.form-section {
+  box-shadow: 5px 10px #333;
+  background-color: #d53369;
+  border: 1px solid #333;
+}
+
+.form-section {
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
+  padding: 30px;
+  padding-bottom: 70px;
+}
+
+.cards-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 5%;
 }

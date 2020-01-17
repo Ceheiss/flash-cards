@@ -23,11 +23,11 @@ const update = (model, message) => {
     case MSGS.NEXT_CARD:
       let nextCard = model.indexOfCurrentCard + 1;
       if (nextCard === model.flashCards.length) nextCard = 0;
-      return { ...model, indexOfCurrentCard: nextCard };
+      return { ...model, indexOfCurrentCard: nextCard, isCurrentDisplayFront: true };
     case MSGS.PREVIOUS_CARD:
       let previousCard = model.indexOfCurrentCard - 1;
       if (previousCard < 0) previousCard = 0;
-      return { ...model, indexOfCurrentCard: previousCard };
+      return { ...model, indexOfCurrentCard: previousCard, isCurrentDisplayFront: true };
     case MSGS.ADD_NEW_CARD:
       const { front, back } = message.messages;
       const arrayWithNewCard = [

@@ -14,6 +14,12 @@ test('should have property backMessage', () => {
 
 test('should have property isCurrentDisplayFront', () => {
   const expected = true;
-  const received = initialState.flashCards[0].hasOwnProperty('isCurrentDisplayFront');
+  const received = initialState.hasOwnProperty('isCurrentDisplayFront');
+  expect(received).toBe(expected);
+});
+
+test('should have property indexOfCurrentCard', () => {
+  const expected = true;
+  const received = initialState.hasOwnProperty('indexOfCurrentCard');
   expect(received).toBe(expected);
 });

@@ -12,7 +12,7 @@ const mockModel = {
   isCurrentDisplayFront: true
 }
 
-test('should change "isCurrentDisplayFront" property of model with each click', () => {
+test("should change 'isCurrentDisplayFront' property of model with each click", () => {
   const sampleModel = { isCurrentDisplayFront: true };
   const received = toggleCard(sampleModel);
   const expected = { isCurrentDisplayFront: false };
@@ -33,7 +33,7 @@ test("should return an updated model with 'isCurrentDisplayFront' value toggled"
     isCurrentDisplayFront: false
   }
   expect(received).toEqual(expected);
-})
+});
 
 test("should return an updated model with increased 'indexOfCurrentCard' value", () => {
   const received = update(mockModel, {type: "NEXT_CARD"});
@@ -49,7 +49,7 @@ test("should return an updated model with increased 'indexOfCurrentCard' value",
     isCurrentDisplayFront: true
   }
   expect(received).toEqual(expected);
-})
+});
 
 test("should return an updated model with decreased 'indexOfCurrentCard' value", () => {
   const received = update({...mockModel, indexOfCurrentCard: 1}, {type: "PREVIOUS_CARD"});
@@ -65,4 +65,4 @@ test("should return an updated model with decreased 'indexOfCurrentCard' value",
     isCurrentDisplayFront: true
   }
   expect(received).toEqual(expected);
-})
+});

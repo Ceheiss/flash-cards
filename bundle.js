@@ -494,11 +494,11 @@ const update = (model, message) => {
     case MSGS.NEXT_CARD:
       let nextCard = model.indexOfCurrentCard + 1;
       if (nextCard === model.flashCards.length) nextCard = 0;
-      return { ...model, indexOfCurrentCard: nextCard };
+      return { ...model, indexOfCurrentCard: nextCard, isCurrentDisplayFront: true };
     case MSGS.PREVIOUS_CARD:
       let previousCard = model.indexOfCurrentCard - 1;
       if (previousCard < 0) previousCard = 0;
-      return { ...model, indexOfCurrentCard: previousCard };
+      return { ...model, indexOfCurrentCard: previousCard, isCurrentDisplayFront: true };
     case MSGS.ADD_NEW_CARD:
       const { front, back } = message.messages;
       const arrayWithNewCard = [
@@ -521,7 +521,7 @@ const h = require("hyperscript");
 const hh = require("hyperscript-helpers");
 const { MSGS } = require("./update.js");
 
-const { div, h1, h3, button, input, form } = hh(h);
+const { div, h1, h3, button, input, form, label } = hh(h);
 
 function buildButtons(dispatch) {
   return {
@@ -537,26 +537,31 @@ function buildButtons(dispatch) {
 }
 
 function buildForm(dispatch) {
-  return form([
+  return form({ className: "form-section" }, [
+    label("Front Message"),
     input({ type: "text", id: "front-input" }),
+    label("Back Message"),
     input({ type: "text", id: "back-input" }),
-    button({
-      type: "button",
-      onclick: () =>
-        dispatch({
-          type: MSGS.ADD_NEW_CARD,
-          messages: {
-            front: document.getElementById("front-input").value,
-            back: document.getElementById("back-input").value
-          }
-        })
-    }, "add card")
+    button(
+      {
+        type: "button",
+        onclick: () =>
+          dispatch({
+            type: MSGS.ADD_NEW_CARD,
+            messages: {
+              front: document.getElementById("front-input").value,
+              back: document.getElementById("back-input").value
+            }
+          })
+      },
+      "add card"
+    )
   ]);
 }
 
 const view = (model, dispatch) => {
   const { nextButton, previousButton } = buildButtons(dispatch);
-  const buttons = div([previousButton, nextButton]);
+  const buttons = div({className: "button-section"}, [previousButton, nextButton]);
   const flashCard = model.flashCards[model.indexOfCurrentCard];
   const frontCardDisplay = div(
     { className: "box", onclick: () => dispatch({ type: MSGS.TOGGLE_CARD }) },
@@ -568,8 +573,14 @@ const view = (model, dispatch) => {
   );
   console.log(model);
   return model.isCurrentDisplayFront
-    ? div([frontCardDisplay, buttons, buildForm(dispatch)])
-    : div([backCardDisplay, buttons, buildForm(dispatch)]);
+    ? div({className: "container"}, [
+        div({ className: "cards-section" }, [frontCardDisplay, buttons]),
+        buildForm(dispatch)
+      ])
+    : div({className: "container"}, [
+        div({ className: "cards-section" }, [backCardDisplay, buttons]),
+        buildForm(dispatch)
+      ]);
 };
 
 module.exports = view;
