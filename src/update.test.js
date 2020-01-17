@@ -4,13 +4,12 @@ const mockModel = {
   flashCards:  [{
     frontMessage: "Front 1",
     backMessage: "Back 1",
-    isCurrentDisplayFront: true
   },{
     frontMessage: "Front 2",
-    backMessage: "Back 2",
-    isCurrentDisplayFront: true
+    backMessage: "Back 2"
   }],
   indexOfCurrentCard: 0,
+  isCurrentDisplayFront: true
 }
 
 test('should change "isCurrentDisplayFront" property of model with each click', () => {
@@ -26,13 +25,12 @@ test("should return an updated model with 'isCurrentDisplayFront' value toggled"
     flashCards:  [{
       frontMessage: "Front 1",
       backMessage: "Back 1",
-      isCurrentDisplayFront: false
     },{
       frontMessage: "Front 2",
       backMessage: "Back 2",
-      isCurrentDisplayFront: true
     }],
     indexOfCurrentCard: 0,
+    isCurrentDisplayFront: false
   }
   expect(received).toEqual(expected);
 })
@@ -42,14 +40,13 @@ test("should return an updated model with increased 'indexOfCurrentCard' value",
   const expected = {
     flashCards:  [{
       frontMessage: "Front 1",
-      backMessage: "Back 1",
-      isCurrentDisplayFront: true
+      backMessage: "Back 1"
     },{
       frontMessage: "Front 2",
-      backMessage: "Back 2",
-      isCurrentDisplayFront: true
+      backMessage: "Back 2"
     }],
     indexOfCurrentCard: 1,
+    isCurrentDisplayFront: true
   }
   expect(received).toEqual(expected);
 })
@@ -59,14 +56,13 @@ test("should return an updated model with decreased 'indexOfCurrentCard' value",
   const expected = {
     flashCards:  [{
       frontMessage: "Front 1",
-      backMessage: "Back 1",
-      isCurrentDisplayFront: true
+      backMessage: "Back 1"
     },{
       frontMessage: "Front 2",
-      backMessage: "Back 2",
-      isCurrentDisplayFront: true
+      backMessage: "Back 2"
     }],
     indexOfCurrentCard: 0,
+    isCurrentDisplayFront: true
   }
   expect(received).toEqual(expected);
 })
