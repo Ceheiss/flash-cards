@@ -11,8 +11,6 @@ const sampledata = [{
 const initialState = {
   flashCards: sampledata,
   indexOfCurrentCard: 0,
-  frontMessageInput: "",
-  backMessageInput: "",
 }
 
 module.exports = initialState;

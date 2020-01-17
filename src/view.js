@@ -2,7 +2,7 @@ const h = require("hyperscript");
 const hh = require("hyperscript-helpers");
 const { MSGS } = require("./update.js");
 
-const { div, h1, h3, button } = hh(h);
+const { div, h1, h3, button, input, form } = hh(h);
 
 function buildButtons(dispatch) {
   return {
@@ -15,6 +15,24 @@ function buildButtons(dispatch) {
       "Previous"
     )
   };
+}
+
+function buildForm(dispatch) {
+  return form([
+    input({ type: "text", id: "front-input" }),
+    input({ type: "text", id: "back-input" }),
+    button({
+      type: "button",
+      onclick: () =>
+        dispatch({
+          type: MSGS.ADD_NEW_CARD,
+          messages: {
+            front: document.getElementById("front-input").value,
+            back: document.getElementById("back-input").value
+          }
+        })
+    })
+  ]);
 }
 
 const view = (model, dispatch) => {
@@ -31,8 +49,8 @@ const view = (model, dispatch) => {
   );
   console.log(model);
   return flashCard.isCurrentDisplayFront
-    ? div([frontCardDisplay, buttons])
-    : div([backCardDisplay, buttons]);
+    ? div([frontCardDisplay, buttons, buildForm(dispatch)])
+    : div([backCardDisplay, buttons, buildForm(dispatch)]);
 };
 
 module.exports = view;

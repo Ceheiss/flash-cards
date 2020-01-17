@@ -466,8 +466,6 @@ const sampledata = [{
 const initialState = {
   flashCards: sampledata,
   indexOfCurrentCard: 0,
-  frontMessageInput: "",
-  backMessageInput: "",
 }
 
 module.exports = initialState;
@@ -477,26 +475,29 @@ const MSGS = {
   NEXT_CARD: "NEXT_CARD",
   PREVIOUS_CARD: "PREVIOUS_CARD",
   FRONT_MESSAGE_INPUT: "FRONT_MESSAGE_INPUT",
-  BACK_MESSAGE_INPUT: "BACK_MESSAGE_INPUT"
-}
+  BACK_MESSAGE_INPUT: "BACK_MESSAGE_INPUT",
+  ADD_NEW_CARD: "ADD_NEW_CARD"
+};
 
-const toggleCard = (flashCard) => {
+const toggleCard = flashCard => {
   if (flashCard.isCurrentDisplayFront) {
-    return {...flashCard, isCurrentDisplayFront: false};
+    return { ...flashCard, isCurrentDisplayFront: false };
   } else {
-    return {...flashCard, isCurrentDisplayFront: true};
-  } 
-}
+    return { ...flashCard, isCurrentDisplayFront: true };
+  }
+};
 
 const inputMessage = (cardSide, inputMessage) => {
-  return cardSide === "front" ? {
-    type: MSGS.FRONT_MESSAGE_INPUT,
-    frontMessageInput: inputMessage
-  } : {
-    type: MSGS.BACK_MESSAGE_INPUT,
-    backMessageInput: inputMessage
-  }
-}
+  return cardSide === "front"
+    ? {
+        type: MSGS.FRONT_MESSAGE_INPUT,
+        frontMessageInput: inputMessage
+      }
+    : {
+        type: MSGS.BACK_MESSAGE_INPUT,
+        backMessageInput: inputMessage
+      };
+};
 
 const update = (model, message) => {
   const flashCard = model.flashCards[model.indexOfCurrentCard];
@@ -504,15 +505,24 @@ const update = (model, message) => {
     case MSGS.TOGGLE_CARD:
       const returnedArray = [...model.flashCards];
       returnedArray[model.indexOfCurrentCard] = toggleCard(flashCard);
-      return {...model, flashCards: returnedArray};
+      return { ...model, flashCards: returnedArray };
     case MSGS.NEXT_CARD:
       let nextCard = model.indexOfCurrentCard + 1;
       if (nextCard === model.flashCards.length) nextCard = 0;
-      return {...model, indexOfCurrentCard: nextCard};
+      return { ...model, indexOfCurrentCard: nextCard };
     case MSGS.PREVIOUS_CARD:
       let previousCard = model.indexOfCurrentCard - 1;
-      if (previousCard < 0) previousCard = 0; 
-      return {...model, indexOfCurrentCard: previousCard};
+      if (previousCard < 0) previousCard = 0;
+      return { ...model, indexOfCurrentCard: previousCard };
+    case MSGS.ADD_NEW_CARD:
+      const { front, back } = message.messages;
+      const arrayWithNewCard = [
+        ...model.flashCards,
+        { frontMessage: front, backMessage: back, isCurrentDisplayFront: true }
+      ];
+      console.log(arrayWithNewCard);
+      return { ...model, flashCards: arrayWithNewCard };
+      ``;
   }
 };
 
@@ -521,13 +531,14 @@ module.exports = {
   update,
   inputMessage,
   MSGS
-}
+};
+
 },{}],11:[function(require,module,exports){
 const h = require("hyperscript");
 const hh = require("hyperscript-helpers");
 const { MSGS } = require("./update.js");
 
-const { div, h1, h3, button } = hh(h);
+const { div, h1, h3, button, input, form } = hh(h);
 
 function buildButtons(dispatch) {
   return {
@@ -540,6 +551,24 @@ function buildButtons(dispatch) {
       "Previous"
     )
   };
+}
+
+function buildForm(dispatch) {
+  return form([
+    input({ type: "text", id: "front-input" }),
+    input({ type: "text", id: "back-input" }),
+    button({
+      type: "button",
+      onclick: () =>
+        dispatch({
+          type: MSGS.ADD_NEW_CARD,
+          messages: {
+            front: document.getElementById("front-input").value,
+            back: document.getElementById("back-input").value
+          }
+        })
+    })
+  ]);
 }
 
 const view = (model, dispatch) => {
@@ -556,8 +585,8 @@ const view = (model, dispatch) => {
   );
   console.log(model);
   return flashCard.isCurrentDisplayFront
-    ? div([frontCardDisplay, buttons])
-    : div([backCardDisplay, buttons]);
+    ? div([frontCardDisplay, buttons, buildForm(dispatch)])
+    : div([backCardDisplay, buttons, buildForm(dispatch)]);
 };
 
 module.exports = view;
