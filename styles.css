@@ -43,6 +43,19 @@ button {
   margin-top: 15px;
 }
 
+button {
+  color: #333;
+  background-color: #eee;
+  border-radius: 3px;
+  transition: 0.3s ease-out;
+}
+
+button:hover{
+  color: #d53369;
+  font-weight: bold;
+  transform: scale(1.2);
+}
+
 .box {
   width: 500px;
   height: 500px;
@@ -78,4 +91,12 @@ button {
   flex-direction: column;
   align-items: center;
   margin: 5%;
+}
+
+#main-title {
+  font-family: 'Timmana', sans-serif;
+  color: #33F6FF;
+  text-shadow: 3px 3px #333;
+  font-size: 80px;
+  margin-bottom: 0em;
 }

@@ -7,11 +7,11 @@ const { div, h1, h3, button, input, form, label } = hh(h);
 function buildButtons(dispatch) {
   return {
     nextButton: button(
-      { onclick: () => dispatch({ type: MSGS.NEXT_CARD }) },
+      { id="next-button", onclick: () => dispatch({ type: MSGS.NEXT_CARD }) },
       "Next"
     ),
     previousButton: button(
-      { onclick: () => dispatch({ type: MSGS.PREVIOUS_CARD }) },
+      { id="previous-button", onclick: () => dispatch({ type: MSGS.PREVIOUS_CARD }) },
       "Previous"
     )
   };
