@@ -455,17 +455,16 @@ app(model, view, update, node);
 },{"./app.js":7,"./model.js":9,"./update.js":10,"./view.js":11}],9:[function(require,module,exports){
 const sampledata = [{
   frontMessage: "Kant is a known...?",
-  backMessage: "Philosopher. He lectured about morality, and epistemology among other topic.",
-  isCurrentDisplayFront: true
+  backMessage: "Philosopher. He lectured about morality, and epistemology among other topic."
 },{
   frontMessage: "Tolstoi is a known...?",
-  backMessage: "Writer. 'The Death of Ival Ilich is a masterpiece'.",
-  isCurrentDisplayFront: true
+  backMessage: "Writer. 'The Death of Ival Ilich is a masterpiece'."
 }]
 
 const initialState = {
   flashCards: sampledata,
-  indexOfCurrentCard: 0
+  indexOfCurrentCard: 0,
+  isCurrentDisplayFront: true
 }
 
 module.exports = initialState;
@@ -479,33 +478,19 @@ const MSGS = {
   ADD_NEW_CARD: "ADD_NEW_CARD"
 };
 
-const toggleCard = flashCard => {
-  if (flashCard.isCurrentDisplayFront) {
-    return { ...flashCard, isCurrentDisplayFront: false };
+const toggleCard = model => {
+  if (model.isCurrentDisplayFront) {
+    return { ...model, isCurrentDisplayFront: false };
   } else {
-    return { ...flashCard, isCurrentDisplayFront: true };
+    return { ...model, isCurrentDisplayFront: true };
   }
 };
 
-const inputMessage = (cardSide, inputMessage) => {
-  return cardSide === "front"
-    ? {
-        type: MSGS.FRONT_MESSAGE_INPUT,
-        frontMessageInput: inputMessage
-      }
-    : {
-        type: MSGS.BACK_MESSAGE_INPUT,
-        backMessageInput: inputMessage
-      };
-};
-
 const update = (model, message) => {
-  const flashCard = model.flashCards[model.indexOfCurrentCard];
   switch (message.type) {
     case MSGS.TOGGLE_CARD:
-      const returnedArray = [...model.flashCards];
-      returnedArray[model.indexOfCurrentCard] = toggleCard(flashCard);
-      return { ...model, flashCards: returnedArray };
+      const updatedModel = toggleCard(model);
+      return updatedModel;
     case MSGS.NEXT_CARD:
       let nextCard = model.indexOfCurrentCard + 1;
       if (nextCard === model.flashCards.length) nextCard = 0;
@@ -582,7 +567,7 @@ const view = (model, dispatch) => {
     [h3({}, flashCard.backMessage)]
   );
   console.log(model);
-  return flashCard.isCurrentDisplayFront
+  return model.isCurrentDisplayFront
     ? div([frontCardDisplay, buttons, buildForm(dispatch)])
     : div([backCardDisplay, buttons, buildForm(dispatch)]);
 };

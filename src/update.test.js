@@ -13,22 +13,12 @@ const mockModel = {
   indexOfCurrentCard: 0,
 }
 
-// test('should change "isCurrentDisplayFront" property of model with each click', () => {
-//   const sampleModel = { isCurrentDisplayFront: true };
-//   const received = toggleCard(sampleModel);
-//   const expected = { isCurrentDisplayFront: false };
-//   expect(received).toEqual(expected);
-// });
-
-
-// test("should return an object that includes type of message and the passed parameter", () => {
-//   const received = inputMessage("back", "First program");
-//   const expected = {
-//     type: "BACK_MESSAGE_INPUT",
-//     backMessageInput: "First program"
-//   }
-//   expect(received).toEqual(expected);
-// })
+test('should change "isCurrentDisplayFront" property of model with each click', () => {
+  const sampleModel = { isCurrentDisplayFront: true };
+  const received = toggleCard(sampleModel);
+  const expected = { isCurrentDisplayFront: false };
+  expect(received).toEqual(expected);
+});
 
 test("should return an updated model with 'isCurrentDisplayFront' value toggled", () => {
   const received = update(mockModel, {type: "TOGGLE_CARD"});

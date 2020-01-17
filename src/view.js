@@ -48,7 +48,7 @@ const view = (model, dispatch) => {
     [h3({}, flashCard.backMessage)]
   );
   console.log(model);
-  return flashCard.isCurrentDisplayFront
+  return model.isCurrentDisplayFront
     ? div([frontCardDisplay, buttons, buildForm(dispatch)])
     : div([backCardDisplay, buttons, buildForm(dispatch)]);
 };

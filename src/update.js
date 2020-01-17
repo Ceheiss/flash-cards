@@ -7,33 +7,19 @@ const MSGS = {
   ADD_NEW_CARD: "ADD_NEW_CARD"
 };
 
-const toggleCard = flashCard => {
-  if (flashCard.isCurrentDisplayFront) {
-    return { ...flashCard, isCurrentDisplayFront: false };
+const toggleCard = model => {
+  if (model.isCurrentDisplayFront) {
+    return { ...model, isCurrentDisplayFront: false };
   } else {
-    return { ...flashCard, isCurrentDisplayFront: true };
+    return { ...model, isCurrentDisplayFront: true };
   }
 };
 
-const inputMessage = (cardSide, inputMessage) => {
-  return cardSide === "front"
-    ? {
-        type: MSGS.FRONT_MESSAGE_INPUT,
-        frontMessageInput: inputMessage
-      }
-    : {
-        type: MSGS.BACK_MESSAGE_INPUT,
-        backMessageInput: inputMessage
-      };
-};
-
 const update = (model, message) => {
-  const flashCard = model.flashCards[model.indexOfCurrentCard];
   switch (message.type) {
     case MSGS.TOGGLE_CARD:
-      const returnedArray = [...model.flashCards];
-      returnedArray[model.indexOfCurrentCard] = toggleCard(flashCard);
-      return { ...model, flashCards: returnedArray };
+      const updatedModel = toggleCard(model);
+      return updatedModel;
     case MSGS.NEXT_CARD:
       let nextCard = model.indexOfCurrentCard + 1;
       if (nextCard === model.flashCards.length) nextCard = 0;
