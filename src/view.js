@@ -7,11 +7,14 @@ const { div, h1, h3, button, input, form, label } = hh(h);
 function buildButtons(dispatch) {
   return {
     nextButton: button(
-      { id="next-button", onclick: () => dispatch({ type: MSGS.NEXT_CARD }) },
+      { id: "next-button", onclick: () => dispatch({ type: MSGS.NEXT_CARD }) },
       "Next"
     ),
     previousButton: button(
-      { id="previous-button", onclick: () => dispatch({ type: MSGS.PREVIOUS_CARD }) },
+      {
+        id: "previous-button",
+        onclick: () => dispatch({ type: MSGS.PREVIOUS_CARD })
+      },
       "Previous"
     )
   };
@@ -26,6 +29,7 @@ function buildForm(dispatch) {
     button(
       {
         type: "button",
+        id: "form-button",
         onclick: () =>
           dispatch({
             type: MSGS.ADD_NEW_CARD,
@@ -42,7 +46,10 @@ function buildForm(dispatch) {
 
 const view = (model, dispatch) => {
   const { nextButton, previousButton } = buildButtons(dispatch);
-  const buttons = div({className: "button-section"}, [previousButton, nextButton]);
+  const buttons = div({ className: "button-section" }, [
+    previousButton,
+    nextButton
+  ]);
   const flashCard = model.flashCards[model.indexOfCurrentCard];
   const frontCardDisplay = div(
     { className: "box", onclick: () => dispatch({ type: MSGS.TOGGLE_CARD }) },
@@ -54,11 +61,11 @@ const view = (model, dispatch) => {
   );
   console.log(model);
   return model.isCurrentDisplayFront
-    ? div({className: "container"}, [
+    ? div({ className: "container" }, [
         div({ className: "cards-section" }, [frontCardDisplay, buttons]),
         buildForm(dispatch)
       ])
-    : div({className: "container"}, [
+    : div({ className: "container" }, [
         div({ className: "cards-section" }, [backCardDisplay, buttons]),
         buildForm(dispatch)
       ]);

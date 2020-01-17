@@ -46,6 +46,7 @@ button {
 button {
   color: #333;
   background-color: #eee;
+  font-size: 15px;
   border-radius: 3px;
   transition: 0.3s ease-out;
 }
@@ -53,7 +54,7 @@ button {
 button:hover{
   color: #d53369;
   font-weight: bold;
-  transform: scale(1.2);
+  transform: scale(1.1);
 }
 
 .box {
@@ -99,4 +100,8 @@ button:hover{
   text-shadow: 3px 3px #333;
   font-size: 80px;
   margin-bottom: 0em;
+}
+
+#previous-button {
+  margin-right: 15px;
 }
